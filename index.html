@@ -4,39 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaladea Animation</title>
+    <!-- Include CreateJS -->
     <script src="createjs.min.js"></script>
-    <script>
-        // Aggiunge un messaggio di verifica nella console per confermare il caricamento
-        console.log("Animazione inizializzata");
-
-        // Funzione principale che esegue l'animazione
-        function init() {
-            var stage = new createjs.Stage("stage");
-
-            // Crea una forma (un cerchio blu)
-            var circle = new createjs.Shape();
-            circle.graphics.beginFill("blue").drawCircle(0, 0, 50);
-            circle.x = circle.y = 100;
-
-            // Aggiungi il cerchio al canvas
-            stage.addChild(circle);
-
-            // Definisci l'animazione
-            createjs.Tween.get(circle, { loop: true })
-                .to({ x: 600 }, 1000, createjs.Ease.getPowInOut(4))
-                .to({ x: 100 }, 1000, createjs.Ease.getPowInOut(4));
-
-            // Aggiorna il canvas a ogni frame
-            createjs.Ticker.framerate = 60;
-            createjs.Ticker.addEventListener("tick", stage);
-        }
-    </script>
+    <!-- Include l'animazione -->
+    <script src="ScrollAnimation.js"></script>
 </head>
-<body onload="init()">
+<body>
     <h1>Benvenuto su Kaladea Animation</h1>
     <!-- Canvas per l'animazione -->
-    <canvas id="stage" width="800" height="400" style="border: 1px solid black;"></canvas>
+    <canvas id="canvas" width="1280" height="720" style="border: 1px solid black;"></canvas>
 </body>
 </html>
-
-

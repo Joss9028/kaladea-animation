@@ -1,4 +1,5 @@
 console.log("ScrollAnimation.js caricato correttamente!");
+console.log("Percorso immagine:", lib.properties.manifest[0].src);
 (function (cjs, an) {
 
 var p; // shortcut to reference prototypes

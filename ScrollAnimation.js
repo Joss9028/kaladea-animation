@@ -1,3 +1,4 @@
+console.log("ScrollAnimation.js caricato correttamente!");
 (function (cjs, an) {
 
 var p; // shortcut to reference prototypes

@@ -174,14 +174,16 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 0.00,
 	manifest: [
-		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliadx.png?v=1733123694", id:"Fogliadx"},
-		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliasx.png?v=1733123708", id:"Fogliasx"}
+		{src:"{{ 'Fogliadx.png' | file_url }}", id:"Fogliadx"},
+		{src:"{{ 'Fogliasx.png' | file_url }}", id:"Fogliasx"}
 	],
 	preloads: []
 };
 
 
+
 // bootstrap callback support:
+
 (lib.Stage = function(canvas) {
 	createjs.Stage.call(this, canvas);
 }).prototype = p = new createjs.Stage();
@@ -190,7 +192,7 @@ p.setAutoPlay = function(autoPlay) {
 	this.tickEnabled = autoPlay;
 }
 p.play = function() { this.tickEnabled = true; this.getChildAt(0).gotoAndPlay(this.getTimelinePosition()) }
-p.stop = function(ms) { this.seek(ms); this.tickEnabled = false; }
+p.stop = function(ms) { if(ms) this.seek(ms); this.tickEnabled = false; }
 p.seek = function(ms) { this.tickEnabled = true; this.getChildAt(0).gotoAndStop(lib.properties.fps * ms / 1000); }
 p.getDuration = function() { return this.getChildAt(0).totalFrames / lib.properties.fps * 1000; }
 
@@ -231,38 +233,42 @@ an.getComposition = function(id) {
 
 
 an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers) {		
-	var lastW, lastH, lastS = 1;		
+	var lastW, lastH, lastS=1;		
 	window.addEventListener('resize', resizeCanvas);		
 	resizeCanvas();		
 	function resizeCanvas() {			
 		var w = lib.properties.width, h = lib.properties.height;			
-		var iw = anim_container.offsetWidth, ih = anim_container.offsetHeight; // Usa il contenitore per calcolare
-		var pRatio = window.devicePixelRatio || 1, xRatio = iw / w, yRatio = ih / h, sRatio = 1;			
-		if (isResp) {                
-			if (!isScale) {					
+		var iw = window.innerWidth, ih=window.innerHeight;			
+		var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+		if(isResp) {                
+			if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+				sRatio = lastS;                
+			}				
+			else if(!isScale) {					
+				if(iw<w || ih<h)						
+					sRatio = Math.min(xRatio, yRatio);				
+			}				
+			else if(scaleType==1) {					
 				sRatio = Math.min(xRatio, yRatio);				
 			}				
-			else if (scaleType === 1) {					
-				sRatio = Math.min(xRatio, yRatio);				
-			}				
-			else if (scaleType === 2) {					
+			else if(scaleType==2) {					
 				sRatio = Math.max(xRatio, yRatio);				
 			}			
 		}
-		domContainers[0].style.width = w * sRatio + 'px';				
-		domContainers[0].style.height = h * sRatio + 'px';		
-		canvas.width = w * pRatio * sRatio;				
-		canvas.height = h * pRatio * sRatio;
-		stage.scaleX = pRatio * sRatio;			
-		stage.scaleY = pRatio * sRatio;
+		domContainers[0].width = w * pRatio * sRatio;			
+		domContainers[0].height = h * pRatio * sRatio;
+		domContainers.forEach(function(container) {				
+			container.style.width = w * sRatio + 'px';				
+			container.style.height = h * sRatio + 'px';			
+		});
+		stage.scaleX = pRatio*sRatio;			
+		stage.scaleY = pRatio*sRatio;
 		lastW = iw; lastH = ih; lastS = sRatio;            
 		stage.tickOnUpdate = false;            
 		stage.update();            
 		stage.tickOnUpdate = true;		
 	}
-};
-
-
+}
 an.handleSoundStreamOnTick = function(event) {
 	if(!event.paused){
 		var stageChild = stage.getChildAt(0);

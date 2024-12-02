@@ -181,9 +181,7 @@ lib.properties = {
 };
 
 
-
 // bootstrap callback support:
-
 (lib.Stage = function(canvas) {
 	createjs.Stage.call(this, canvas);
 }).prototype = p = new createjs.Stage();
@@ -192,7 +190,7 @@ p.setAutoPlay = function(autoPlay) {
 	this.tickEnabled = autoPlay;
 }
 p.play = function() { this.tickEnabled = true; this.getChildAt(0).gotoAndPlay(this.getTimelinePosition()) }
-p.stop = function(ms) { if(ms) this.seek(ms); this.tickEnabled = false; }
+p.stop = function(ms) { this.seek(ms); this.tickEnabled = false; }
 p.seek = function(ms) { this.tickEnabled = true; this.getChildAt(0).gotoAndStop(lib.properties.fps * ms / 1000); }
 p.getDuration = function() { return this.getChildAt(0).totalFrames / lib.properties.fps * 1000; }
 

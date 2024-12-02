@@ -4,11 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kaladea Animation</title>
+    <!-- Include CreateJS Library -->
     <script src="createjs.min.js"></script>
+    <!-- Include ScrollAnimation.js -->
     <script src="ScrollAnimation.js"></script>
 </head>
 <body>
     <h1>Benvenuto su Kaladea Animation</h1>
-    <canvas id="canvas" width="1280" height="720" style="background-color: transparent;"></canvas>
+    <!-- Canvas Element -->
+    <canvas id="canvas" width="1280" height="500" style="background-color: transparent;"></canvas>
+    <script>
+        // Avvia l'animazione quando la pagina è caricata
+        const canvas = document.getElementById("canvas");
+        const animComposition = AdobeAn.getComposition("E5AD754AC64746D088F69B5BBD8CA8DA");
+        const lib = animComposition.getLibrary();
+        const exportRoot = new lib.ScrollAnimation();
+        const stage = new lib.Stage(canvas);
+
+        createjs.Ticker.framerate = lib.properties.fps;
+        createjs.Ticker.addEventListener("tick", stage);
+        stage.addChild(exportRoot);
+    </script>
 </body>
 </html>
+

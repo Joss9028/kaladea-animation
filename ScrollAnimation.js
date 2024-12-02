@@ -37,29 +37,6 @@ p.nominalBounds = new cjs.Rectangle(0,0,290,687);
 p.nominalBounds = new cjs.Rectangle(0,0,319,1057);
 
 
-(lib.Interpolazione4 = function(mode,startPosition,loop,reversed) {
-if (loop == null) { loop = true; }
-if (reversed == null) { reversed = false; }
-	var props = new Object();
-	props.mode = mode;
-	props.startPosition = startPosition;
-	props.labels = {};
-	props.loop = loop;
-	props.reversed = reversed;
-	cjs.MovieClip.apply(this,[props]);
-
-	// Livello_1
-	this.instance = new lib.Fogliasx();
-	this.instance.setTransform(-159.5,-528.5);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-159.5,-528.5,319,1057);
-
-
 (lib.Interpolazione3 = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = true; }
 if (reversed == null) { reversed = false; }
@@ -81,29 +58,6 @@ if (reversed == null) { reversed = false; }
 
 }).prototype = p = new cjs.MovieClip();
 p.nominalBounds = new cjs.Rectangle(-159.5,-528.5,319,1057);
-
-
-(lib.Interpolazione2 = function(mode,startPosition,loop,reversed) {
-if (loop == null) { loop = true; }
-if (reversed == null) { reversed = false; }
-	var props = new Object();
-	props.mode = mode;
-	props.startPosition = startPosition;
-	props.labels = {};
-	props.loop = loop;
-	props.reversed = reversed;
-	cjs.MovieClip.apply(this,[props]);
-
-	// Livello_1
-	this.instance = new lib.Fogliadx();
-	this.instance.setTransform(-145,-343.5);
-
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
-
-	this._renderFirstFrame();
-
-}).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-145,-343.5,290,687);
 
 
 (lib.Interpolazione1 = function(mode,startPosition,loop,reversed) {
@@ -130,7 +84,7 @@ p.nominalBounds = new cjs.Rectangle(-145,-343.5,290,687);
 
 
 // stage content:
-(lib.ScrollAnimation = function(mode,startPosition,loop,reversed) {
+(lib.RECOVER_ScrollAnimation = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = false; }
 if (reversed == null) { reversed = false; }
 	var props = new Object();
@@ -143,28 +97,20 @@ if (reversed == null) { reversed = false; }
 
 	// Foglia_Sx
 	this.instance = new lib.Interpolazione1("synched",0,false);
-	this.instance.setTransform(-153,261.5);
+	this.instance.setTransform(-153,237.5,0.7207,0.7207);
 
-	this.instance_1 = new lib.Interpolazione2("synched",0);
-	this.instance_1.setTransform(153,261.5);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance}]}).to({state:[{t:this.instance_1}]},59).wait(1));
-	this.timeline.addTween(cjs.Tween.get(this.instance).to({_off:true,x:147},59).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance).to({x:104.2,y:251.1},59).wait(1));
 
 	// Foglia_Dx
-	this.instance_2 = new lib.Interpolazione3("synched",0);
-	this.instance_2.setTransform(1450.5,202.5);
+	this.instance_1 = new lib.Interpolazione3("synched",0);
+	this.instance_1.setTransform(1362.55,252.5,0.4713,0.4713);
 
-	this.instance_3 = new lib.Interpolazione4("synched",0);
-	this.instance_3.setTransform(1120.5,202.5);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance_2}]}).to({state:[{t:this.instance_3}]},59).wait(1));
-	this.timeline.addTween(cjs.Tween.get(this.instance_2).to({_off:true,x:1120.5},59).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleY:0.458,x:1204.45},59).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new lib.AnMovieClip();
-p.nominalBounds = new cjs.Rectangle(342,-76,1268,807);
+p.nominalBounds = new cjs.Rectangle(382.6,240,1055.1,261.6);
 // library properties:
 lib.properties = {
 	id: 'E5AD754AC64746D088F69B5BBD8CA8DA',
@@ -174,8 +120,8 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 0.00,
 	manifest: [
-		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliadx.png?v=1733123694", id:"Fogliadx"},
-		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliasx.png?v=1733123708", id:"Fogliasx"}
+		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliadx.png?v=1733131895", id:"Fogliadx"},
+		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliasx.png?v=1733131896", id:"Fogliasx"}
 	],
 	preloads: []
 };

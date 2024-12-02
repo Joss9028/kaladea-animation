@@ -96,16 +96,16 @@ if (reversed == null) { reversed = false; }
 	cjs.MovieClip.apply(this,[props]);
 
 	// Foglia_Sx
-	this.instance = new lib.Interpolazione1("synched",0,false);
-	this.instance.setTransform(-153,237.5,0.7207,0.7207);
-        console.log("Foglia sinistra:", this.instance.x, this.instance.y);
+	this.instance = new lib.Interpolazione1("synched", 0, false);
+        this.instance.setTransform(-200, 250, 1, 1); // x fuori dallo stage
+        this.timeline.addTween(cjs.Tween.get(this.instance).to({x:150}, 59));
 
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({x:104.2,y:251.1},59).wait(1));
 
 	// Foglia_Dx
-	this.instance_1 = new lib.Interpolazione3("synched",0);
-	this.instance_1.setTransform(990, 252.5, 0.4713, 0.4713);
-        console.log("Foglia destra:", this.instance_1.x, this.instance_1.y);
+	this.instance_1 = new lib.Interpolazione2("synched", 0);
+        this.instance_1.setTransform(1500, 250, 1, 1); // x fuori dallo stage
+        this.timeline.addTween(cjs.Tween.get(this.instance_1).to({x:1130}, 59));
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleY:0.458,x:1204.45},59).wait(1));
 

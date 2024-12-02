@@ -236,15 +236,11 @@ an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers)
 	resizeCanvas();		
 	function resizeCanvas() {			
 		var w = lib.properties.width, h = lib.properties.height;			
-		var iw = window.innerWidth, ih = window.innerHeight;			
+		var iw = anim_container.offsetWidth, ih = anim_container.offsetHeight; // Usa il contenitore per calcolare
 		var pRatio = window.devicePixelRatio || 1, xRatio = iw / w, yRatio = ih / h, sRatio = 1;			
 		if (isResp) {                
-			if ((respDim === 'width' && lastW === iw) || (respDim === 'height' && lastH === ih)) {                    
-				sRatio = lastS;                
-			}				
-			else if (!isScale) {					
-				if (iw < w || ih < h)						
-					sRatio = Math.min(xRatio, yRatio);				
+			if (!isScale) {					
+				sRatio = Math.min(xRatio, yRatio);				
 			}				
 			else if (scaleType === 1) {					
 				sRatio = Math.min(xRatio, yRatio);				
@@ -255,10 +251,8 @@ an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers)
 		}
 		domContainers[0].style.width = w * sRatio + 'px';				
 		domContainers[0].style.height = h * sRatio + 'px';		
-		domContainers.forEach(function(container) {				
-			container.width = w * sRatio;				
-			container.height = h * sRatio;			
-		});
+		canvas.width = w * pRatio * sRatio;				
+		canvas.height = h * pRatio * sRatio;
 		stage.scaleX = pRatio * sRatio;			
 		stage.scaleY = pRatio * sRatio;
 		lastW = iw; lastH = ih; lastS = sRatio;            
@@ -267,6 +261,7 @@ an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers)
 		stage.tickOnUpdate = true;		
 	}
 };
+
 
 an.handleSoundStreamOnTick = function(event) {
 	if(!event.paused){

@@ -174,8 +174,8 @@ lib.properties = {
 	color: "#FFFFFF",
 	opacity: 0.00,
 	manifest: [
-		{src:"Fogliadx.png", id:"Fogliadx"},
-		{src:"Fogliasx.png", id:"Fogliasx"}
+		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliadx.png?v=1733123694", id:"Fogliadx"},
+		{src:"https://cdn.shopify.com/s/files/1/0656/3885/9019/files/Fogliasx.png?v=1733123708", id:"Fogliasx"}
 	],
 	preloads: []
 };

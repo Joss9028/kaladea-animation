@@ -84,7 +84,7 @@ p.nominalBounds = new cjs.Rectangle(-145,-343.5,290,687);
 
 
 // stage content:
-(lib._ScrollAnimation = function(mode,startPosition,loop,reversed) {
+(lib.RECOVER_ScrollAnimation = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = false; }
 if (reversed == null) { reversed = false; }
 	var props = new Object();

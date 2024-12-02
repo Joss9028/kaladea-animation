@@ -105,7 +105,7 @@ if (reversed == null) { reversed = false; }
 	// Foglia_Dx
 	this.instance_1 = new lib.Interpolazione3("synched",0);
 	this.instance_1.setTransform(990, 252.5, 0.4713, 0.4713);
-        console.log("Foglia destra X:", this.instance_1.x);
+        console.log("Foglia destra:", this.instance_1.x, this.instance_1.y);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleY:0.458,x:1204.45},59).wait(1));
 

@@ -84,7 +84,7 @@ p.nominalBounds = new cjs.Rectangle(-145,-343.5,290,687);
 
 
 // stage content:
-(lib.ScrollAnimation = function(mode,startPosition,loop,reversed) {
+(lib._ScrollAnimation = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = false; }
 if (reversed == null) { reversed = false; }
 	var props = new Object();
@@ -178,38 +178,43 @@ an.getComposition = function(id) {
 }
 
 
-function resizeCanvas() {
-    var w = lib.properties.width, h = lib.properties.height;
-    var iw = window.innerWidth, ih = window.innerHeight;
-    var pRatio = window.devicePixelRatio || 1, xRatio = iw / w, yRatio = ih / h, sRatio = 1;
-
-    if (isResp) {
-        if ((respDim == 'width' && lastW == iw) || (respDim == 'height' && lastH == ih)) {
-            sRatio = lastS;
-        } else if (!isScale) {
-            sRatio = Math.min(xRatio, yRatio);
-        } else if (scaleType == 1) {
-            sRatio = Math.min(xRatio, yRatio);
-        } else if (scaleType == 2) {
-            sRatio = Math.max(xRatio, yRatio);
-        }
-    }
-
-    domContainers[0].width = w * pRatio * sRatio;
-    domContainers[0].height = h * pRatio * sRatio;
-    domContainers.forEach(function (container) {
-        container.style.width = w * sRatio + 'px';
-        container.style.height = h * sRatio + 'px';
-    });
-
-    stage.scaleX = pRatio * sRatio;
-    stage.scaleY = pRatio * sRatio;
-    lastW = iw; lastH = ih; lastS = sRatio;
-    stage.tickOnUpdate = false;
-    stage.update();
-    stage.tickOnUpdate = true;
+an.makeResponsive = function(isResp, respDim, isScale, scaleType, domContainers) {		
+	var lastW, lastH, lastS=1;		
+	window.addEventListener('resize', resizeCanvas);		
+	resizeCanvas();		
+	function resizeCanvas() {			
+		var w = lib.properties.width, h = lib.properties.height;			
+		var iw = window.innerWidth, ih=window.innerHeight;			
+		var pRatio = window.devicePixelRatio || 1, xRatio=iw/w, yRatio=ih/h, sRatio=1;			
+		if(isResp) {                
+			if((respDim=='width'&&lastW==iw) || (respDim=='height'&&lastH==ih)) {                    
+				sRatio = lastS;                
+			}				
+			else if(!isScale) {					
+				if(iw<w || ih<h)						
+					sRatio = Math.min(xRatio, yRatio);				
+			}				
+			else if(scaleType==1) {					
+				sRatio = Math.min(xRatio, yRatio);				
+			}				
+			else if(scaleType==2) {					
+				sRatio = Math.max(xRatio, yRatio);				
+			}			
+		}
+		domContainers[0].width = w * pRatio * sRatio;			
+		domContainers[0].height = h * pRatio * sRatio;
+		domContainers.forEach(function(container) {				
+			container.style.width = w * sRatio + 'px';				
+			container.style.height = h * sRatio + 'px';			
+		});
+		stage.scaleX = pRatio*sRatio;			
+		stage.scaleY = pRatio*sRatio;
+		lastW = iw; lastH = ih; lastS = sRatio;            
+		stage.tickOnUpdate = false;            
+		stage.update();            
+		stage.tickOnUpdate = true;		
+	}
 }
-
 an.handleSoundStreamOnTick = function(event) {
 	if(!event.paused){
 		var stageChild = stage.getChildAt(0);

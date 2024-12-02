@@ -146,7 +146,7 @@ if (reversed == null) { reversed = false; }
 	this.instance.setTransform(-153,261.5);
 
 	this.instance_1 = new lib.Interpolazione2("synched",0);
-	this.instance_1.setTransform(147,261.5);
+	this.instance_1.setTransform(153,261.5);
 
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.instance}]}).to({state:[{t:this.instance_1}]},59).wait(1));
 	this.timeline.addTween(cjs.Tween.get(this.instance).to({_off:true,x:147},59).wait(1));
